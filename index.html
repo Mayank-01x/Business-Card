@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mayank Aggarwal - Business Card</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-size: cover;
+      background-position: center;
+    }
+
+    #businessCard {
+      box-shadow: 0 0 70px rgba(0, 0, 0, 0.1);
+      background-color: #d9f3ed; /* Added background color with opacity */
+      padding: 20px;
+      width: 350px;
+      text-align: center;
+      border-radius: 10px;
+      transition: transform 0.3s ease-in-out;
+      position: relative; /* Ensure the business card is above the dots */
+      z-index: 1; /* Ensure the business card is above the dots */
+    }
+
+    .profile-photo {
+      width: 100px;
+      height: auto;
+      border-radius: 50%;
+      margin: 20px 0;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    h1 {
+      color: #333;
+      font-size: 24px;
+    }
+
+    p {
+      color: #666;
+      font-size: 16px;
+    }
+
+    a {
+      color: #1a0dab;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .profile-photo:hover {
+      transform: scale(1.1);
+    }
+
+    #businessCard:hover {
+      transform: scale(1.1);
+    }
+
+    @media only screen and (max-width: 600px) {
+      #businessCard {
+          width: 90%;
+          padding: 10px;
+      }
+    }
+
+    /* Moving Dots CSS */
+    #movingDots {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+
+    /* Apply animation to all circles */
+    #movingDots circle {
+      animation: moveDots infinite linear;
+    }
+
+    /* Define CSS animation for moving dots */
+    @keyframes moveDots {
+      from {
+        transform: translate(0, 0);
+      }
+      to {
+        transform: translate(100vw, 100vh);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="businessCard">
+    <img src="myphoto.jpeg" alt="Mayank Aggarwal" class="profile-photo">
+    <p>Junior Web Developer</p>
+    <p>Email: <a href="mailto:mayank.420.m@gmail.com">mayank.420.m@gmail.com</a></p>
+    <div id="socialLinks">
+      <p>LinkedIn: <a href="https://www.linkedin.com/in/mayank529/" target="_blank">Mayank Aggarwal</a></p>
+    </div>
+    <div id="bio">
+      <h2>About Me</h2>
+      <p>Tech Enthusiast: Passionate about all things tech. From coding to gadgets, I thrive on exploring the ever-evolving world of technology. <br> Let's geek out together! 💫</p>
+    </div>
+  </div>
+
+  <!-- Moving Dots SVG -->
+  <svg id="movingDots" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 1160 629" fill="none">
+    <g id="smallCircles">
+      <circle cx="63" cy="36" r="8" fill="#3D57FA"/>
+      <circle cx="376" cy="50" r="5" fill="#3D57FA"/>
+      <circle cx="827" cy="30" r="5" fill="#3D57FA"/>
+      <circle cx="1153" cy="20" r="7" fill="#3D57FA"/>
+      <circle cx="1000" cy="237" r="3" fill="#3D57FA"/>
+      <circle cx="1012" cy="473" r="5" fill="#3D57FA"/>
+      <circle cx="650.5" cy="457.5" r="2.5" fill="#3D57FA"/>
+      <circle cx="351" cy="625" r="4" fill="#3D57FA"/>
+      <circle cx="289" cy="343" r="6" fill="#3D57FA"/>
+      <circle cx="5" cy="506" r="5" fill="#3D57FA"/>
+      <!-- Additional Dots -->
+      <circle cx="450" cy="20" r="6" fill="#3D57FA"/>
+      <circle cx="800" cy="300" r="3" fill="#3D57FA"/>
+      <circle cx="200" cy="500" r="4" fill="#3D57FA"/>
+    </g>
+  </svg>
+
+  <script>
+    const circles = document.querySelectorAll('circle');
+
+    circles.forEach(circle => {
+      const randomVelocityX = Math.random() * 0.5 + 0.2; // Random velocity between 0.2 and 0.7
+      const randomVelocityY = Math.random() * 0.5 + 0.2; // Random velocity between 0.2 and 0.7
+
+      let x = Math.random() * window.innerWidth; // Random initial x position
+      let y = Math.random() * window.innerHeight; // Random initial y position
+
+      let angle = Math.random() * Math.PI * 2; // Random initial direction
+
+      function updatePosition() {
+        // Update position based on velocity and direction
+        x += Math.cos(angle) * randomVelocityX;
+        y += Math.sin(angle) * randomVelocityY;
+
+        // Check if the dot is out of the screen, then reset its position
+        if (x < 0 || x > window.innerWidth || y < 0 || y > window.innerHeight) {
+          x = Math.random() * window.innerWidth;
+          y = Math.random() * window.innerHeight;
+        }
+
+        // Apply new position to the dot
+        circle.setAttribute('cx', x);
+        circle.setAttribute('cy', y);
+      }
+
+      // Update dot position continuously
+      setInterval(updatePosition, 1000 / 60); // 60 FPS
+    });
+  </script>
+</body>
+</html>
